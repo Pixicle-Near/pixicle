@@ -8,16 +8,16 @@ function Header() {
       justifyContent={"space-between"}
       alignItems={"center"}
       width={"100%"}
-      padding={["0.98rem 0.88rem", "1.88rem 4.63rem"]}
+      padding={["0.98rem 0.88rem", "0.98rem 0.88rem", "1.88rem 4.63rem"]}
     >
       {/* {Logo} */}
-      <Text fontSize={["1.5rem", "2.5rem"]} fontWeight={400}>
+      <Text fontSize={["1.5rem", "1.5rem", "2.5rem"]} fontWeight={400}>
         Pixicle
       </Text>
 
       {/* {Desktop Menu's} */}
       <HStack
-        display={["none", "flex"]}
+        display={["none", "none", "flex"]}
         gap={"4rem"}
         fontSize={"1.5rem"}
         fontWeight={400}
@@ -35,7 +35,7 @@ function Header() {
         fontSize={"1.5rem"}
         fontWeight={"400"}
         color={"#FFFFFF"}
-        display={["none", "flex"]}
+        display={["none", "none", "flex"]}
         alignItems={"center"}
         gap={"1rem"}
         justifyContent={"center"}
@@ -49,7 +49,11 @@ function Header() {
       </Button>
 
       {/* {Mobile Menu's} */}
-      <HStack display={["flex", "none"]} alignItems={"center"} gap={"1rem"}>
+      <HStack
+        display={["flex", "flex", "none"]}
+        alignItems={"center"}
+        gap={"1rem"}
+      >
         <WalletIconMob />
         <Hamburger />
       </HStack>
