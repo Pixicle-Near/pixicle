@@ -8,6 +8,7 @@ import bgc from "../../public/images/bitcoin-gocard 1.png";
 import eth from "../../public/images/ethereum 1.png";
 import dash from "../../public/images/dash-2 1.png";
 import meta from "../../public/images/Frame 18.png";
+import CollectionCard from "@/components/_collectionCard";
 
 export default function Home() {
   return (
@@ -116,6 +117,7 @@ export default function Home() {
           <Image src={dash} alt="dash" style={{ width: "8.33rem" }} />
         </HStack>
       </VStack>
+      <CollectionCard />
     </main>
   );
 }
