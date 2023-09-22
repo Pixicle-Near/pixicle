@@ -4,6 +4,10 @@ import Header from "@/components/_header";
 import { VStack, Text, HStack, Button, Box } from "@chakra-ui/react";
 import { DirArrow } from "@/utils/icons";
 import nfts from "../../public/images/group-2.png";
+import bgc from "../../public/images/bitcoin-gocard 1.png";
+import eth from "../../public/images/ethereum 1.png";
+import dash from "../../public/images/dash-2 1.png";
+import meta from "../../public/images/Frame 18.png";
 
 export default function Home() {
   return (
@@ -78,6 +82,25 @@ export default function Home() {
           />
         </Box>
       </div>
+      <VStack
+        fontFamily={"NexaBold"}
+        padding={"2rem 3.38rem 4rem"}
+        gap={"3.38rem"}
+        bgColor={"#1E1E1E"}
+        w={"100%"}
+      >
+        <Text fontSize={"3rem"}>Our Partners</Text>
+        <HStack
+          alignItems={"flex-end"}
+          justifyContent={"center"}
+          gap={"7.19rem"}
+        >
+          <Image src={meta} alt="meta" />
+          <Image src={eth} alt="eth" />
+          <Image src={bgc} alt="bgc" />
+          <Image src={dash} alt="dash" />
+        </HStack>
+      </VStack>
     </main>
   );
 }
