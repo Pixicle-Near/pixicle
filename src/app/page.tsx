@@ -84,21 +84,36 @@ export default function Home() {
       </div>
       <VStack
         fontFamily={"NexaBold"}
-        padding={"2rem 3.38rem 4rem"}
-        gap={"3.38rem"}
+        padding={["1.29rem 0", "1.29rem 0", "2rem 3.38rem 4rem"]}
+        gap={["1.44rem", "1.44rem", "3.38rem"]}
         bgColor={"#1E1E1E"}
         w={"100%"}
       >
-        <Text fontSize={"3rem"}>Our Partners</Text>
+        <Text fontSize={["1.5rem", "1.5rem", "3rem"]}>Our Partners</Text>
         <HStack
           alignItems={"flex-end"}
           justifyContent={"center"}
           gap={"7.19rem"}
+          display={["none", "none", "flex"]}
         >
           <Image src={meta} alt="meta" />
           <Image src={eth} alt="eth" />
           <Image src={bgc} alt="bgc" />
           <Image src={dash} alt="dash" />
+        </HStack>
+        <HStack
+          alignItems={"flex-end"}
+          justifyContent={"center"}
+          gap={"1.5rem"}
+          display={["flex", "flex", "none"]}
+          w={"100%"}
+          overflowX={"auto"}
+          pl={"15rem"}
+        >
+          <Image src={meta} alt="meta" style={{ width: "8.33rem" }} />
+          <Image src={eth} alt="eth" style={{ width: "8.33rem" }} />
+          <Image src={bgc} alt="bgc" style={{ width: "8.33rem" }} />
+          <Image src={dash} alt="dash" style={{ width: "8.33rem" }} />
         </HStack>
       </VStack>
     </main>
