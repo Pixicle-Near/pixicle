@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "@/components/_header";
-import { VStack, Text, HStack, Button, Box } from "@chakra-ui/react";
+import { VStack, Text, HStack, Button, Box, Stack } from "@chakra-ui/react";
 import { DirArrow } from "@/utils/icons";
 import nfts from "../../public/images/group-2.png";
 import bgc from "../../public/images/bitcoin-gocard 1.png";
@@ -117,7 +117,28 @@ export default function Home() {
           <Image src={dash} alt="dash" style={{ width: "8.33rem" }} />
         </HStack>
       </VStack>
-      <CollectionCard />
+      {/* <CollectionCards /> */}
+      <VStack fontFamily={"NexaBold"} pt={["2rem", "2rem", "3.5rem"]}>
+        <Text fontSize={["1.5rem", "1.5rem", "3rem"]} fontWeight={400}>
+          Top Collections
+        </Text>
+        <Stack
+          py={["1.5rem", "1.5rem", "4rem"]}
+          direction={["column", "column", "row"]}
+          flexWrap={["nowrap", "nowrap", "wrap"]}
+          px={["1rem", "1rem", "4.62rem"]}
+          gap={["0.75rem", "0.75rem", "4.8rem"]}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <CollectionCard />
+          <CollectionCard />
+          <CollectionCard />
+          <CollectionCard />
+          <CollectionCard />
+          <CollectionCard />
+        </Stack>
+      </VStack>
     </main>
   );
 }
