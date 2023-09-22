@@ -10,11 +10,19 @@ export default function Home() {
     <main className={styles.main}>
       <Header />
       <div className={styles.center}>
-        <VStack fontFamily={"NexaBold"} gap={"5.4rem"} pl={"4.62rem"}>
-          <Text fontSize={"5rem"} fontWeight={400}>
+        <VStack
+          fontFamily={"NexaBold"}
+          gap={["1.56rem", "1.56rem", "5.4rem"]}
+          pl={["1rem", "1rem", "4.62rem"]}
+        >
+          <Text fontSize={["2.629rem", "2.629rem", "5rem"]} fontWeight={400}>
             Get the best and popular NFT collections
           </Text>
-          <HStack alignItems={"flex-start"} w={"100%"} gap={"2.31rem"}>
+          <HStack
+            alignItems={"flex-start"}
+            w={"100%"}
+            gap={["1.5rem", "2.31rem", "2.31rem"]}
+          >
             <Button
               variant={"outline"}
               colorScheme="green"
@@ -23,13 +31,13 @@ export default function Home() {
               display={"flex"}
               justifyContent={"center"}
               alignItems={"center"}
-              gap={"0.5rem"}
-              height={"4.4rem"}
+              gap={["0.2rem", "0.2rem", "0.5rem"]}
+              height={["2.6rem", "2.6rem", "4.4rem"]}
             >
-              <Text fontSize={"1.5rem"} fontWeight={400}>
+              <Text fontSize={["1rem", "1rem", "1.5rem"]} fontWeight={400}>
                 Explore More
               </Text>
-              <DirArrow color={"#1DB96F"} />
+              <DirArrow color={"#1DB96F"} size={"2.5vw"} />
             </Button>
             <Button
               variant={"solid"}
@@ -39,22 +47,34 @@ export default function Home() {
               display={"flex"}
               justifyContent={"center"}
               alignItems={"center"}
-              gap={"0.5rem"}
-              height={"4.4rem"}
+              gap={["0.2rem", "0.2rem", "0.5rem"]}
+              height={["2.6rem", "2.6rem", "4.4rem"]}
             >
-              <Text fontSize={"1.5rem"} fontWeight={400}>
+              <Text fontSize={["1rem", "1rem", "1.5rem"]} fontWeight={400}>
                 Create wallet
               </Text>
-              <DirArrow color={"#FFFFFF"} />
+              <DirArrow color={"#FFFFFF"} size={"2.5vw"} />
             </Button>
           </HStack>
         </VStack>
-        <Box>
+        <Box display={["none", "block"]}>
           <Image
             className={styles.nfts}
             src={nfts}
             alt="nfts"
             style={{ width: "120rem" }}
+          />
+        </Box>
+        <Box display={["block", "none"]}>
+          <Image
+            src={nfts}
+            alt="nfts"
+            style={{
+              width: "120rem",
+              left: "-2rem",
+              position: "relative",
+              objectFit: "cover",
+            }}
           />
         </Box>
       </div>
