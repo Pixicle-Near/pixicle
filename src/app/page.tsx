@@ -9,11 +9,14 @@ import eth from "../../public/images/ethereum 1.png";
 import dash from "../../public/images/dash-2 1.png";
 import meta from "../../public/images/Frame 18.png";
 import CollectionCard from "@/components/_collectionCard";
+import NftCard from "@/components/_nftCard";
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <Header />
+
+      {/* <Hero Section /> */}
       <div className={styles.center}>
         <VStack
           fontFamily={"NexaBold"}
@@ -83,6 +86,8 @@ export default function Home() {
           />
         </Box>
       </div>
+
+      {/* <Our Partners Section /> */}
       <VStack
         fontFamily={"NexaBold"}
         padding={["1.29rem 0", "1.29rem 0", "2rem 3.38rem 4rem"]}
@@ -117,7 +122,8 @@ export default function Home() {
           <Image src={dash} alt="dash" style={{ width: "8.33rem" }} />
         </HStack>
       </VStack>
-      {/* <CollectionCards /> */}
+
+      {/* <CollectionCards Section /> */}
       <VStack fontFamily={"NexaBold"} pt={["2rem", "2rem", "3.5rem"]}>
         <Text fontSize={["1.5rem", "1.5rem", "3rem"]} fontWeight={400}>
           Top Collections
@@ -139,6 +145,7 @@ export default function Home() {
           <CollectionCard />
         </Stack>
       </VStack>
+      <NftCard />
     </main>
   );
 }
