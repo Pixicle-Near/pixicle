@@ -1,96 +1,62 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "@/components/_header";
+import { VStack, Text, HStack, Button, Box } from "@chakra-ui/react";
+import { DirArrow } from "@/utils/icons";
+import nfts from "../../public/images/group-2.png";
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <Header />
-      <div className={styles.description}>
-        {/* <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p> */}
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
       <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <VStack fontFamily={"NexaBold"} gap={"5.4rem"} pl={"4.62rem"}>
+          <Text fontSize={"5rem"} fontWeight={400}>
+            Get the best and popular NFT collections
+          </Text>
+          <HStack alignItems={"flex-start"} w={"100%"} gap={"2.31rem"}>
+            <Button
+              variant={"outline"}
+              colorScheme="green"
+              borderRadius={"1rem"}
+              padding={"1rem"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={"0.5rem"}
+              height={"4.4rem"}
+            >
+              <Text fontSize={"1.5rem"} fontWeight={400}>
+                Explore More
+              </Text>
+              <DirArrow color={"#1DB96F"} />
+            </Button>
+            <Button
+              variant={"solid"}
+              colorScheme="green"
+              borderRadius={"1rem"}
+              padding={"1rem"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={"0.5rem"}
+              height={"4.4rem"}
+            >
+              <Text fontSize={"1.5rem"} fontWeight={400}>
+                Create wallet
+              </Text>
+              <DirArrow color={"#FFFFFF"} />
+            </Button>
+          </HStack>
+        </VStack>
+        <Box>
+          <Image
+            className={styles.nfts}
+            src={nfts}
+            alt="nfts"
+            style={{ width: "120rem" }}
+          />
+        </Box>
       </div>
     </main>
   );

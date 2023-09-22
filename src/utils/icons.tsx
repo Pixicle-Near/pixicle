@@ -73,3 +73,37 @@ export function Hamburger() {
     </svg>
   );
 }
+
+//type for props
+type DirArrowProps = {
+  color: string;
+};
+export function DirArrow({ color }: DirArrowProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="33"
+      height="33"
+      viewBox="0 0 33 33"
+      fill="none"
+    >
+      <mask
+        id="mask0_39_1010"
+        style={{ maskType: "alpha" }}
+        maskUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width="33"
+        height="33"
+      >
+        <rect x="0.375" y="0.557129" width="32" height="32" fill="#D9D9D9" />
+      </mask>
+      <g mask="url(#mask0_39_1010)">
+        <path
+          d="M8.90573 24.557L7.03906 22.6903L19.8391 9.8903H8.3724V7.22363H24.3724V23.2236H21.7057V11.757L8.90573 24.557Z"
+          fill={color}
+        />
+      </g>
+    </svg>
+  );
+}
