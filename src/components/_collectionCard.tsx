@@ -5,7 +5,8 @@ import Image from "next/image";
 function CollectionCard() {
   return (
     <HStack
-      w={["24.633rem", "24.633rem", "39.87rem"]}
+      w={["100%"]}
+      maxW={["24.633rem", "24.633rem", "39.87rem"]}
       bgColor={"#010604"}
       backgroundBlendMode={"overlay"}
       boxShadow={[
@@ -16,8 +17,8 @@ function CollectionCard() {
       backdropBlur={["2.47px", "2.47px", "4px"]}
       borderRadius={["0.62rem", "0.62rem", "1rem"]}
       padding={[
-        "1.22rem 0.85rem 0.65",
-        "1.22rem 0.85rem 0.65",
+        "1.22rem 1rem 0.65rem",
+        "1.22rem 0.85rem 0.65rem",
         "1.37rem 1.37rem 1.22rem",
       ]}
     >
@@ -48,6 +49,7 @@ function CollectionCard() {
         flex={1}
         alignItems={"flex-start"}
         gap={["0.22rem", "0.22rem", "0.44rem"]}
+        color={"#FFFFFF"}
       >
         <Text fontSize={["1rem", "1rem", "2rem"]} fontWeight={400}>
           Bored Ape Yacht Club

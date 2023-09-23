@@ -95,6 +95,7 @@ export default function Home() {
         gap={["1.44rem", "1.44rem", "3.38rem"]}
         bgColor={"#1E1E1E"}
         w={"100%"}
+        color={"#FFFFFF"}
       >
         <Text fontSize={["1.5rem", "1.5rem", "3rem"]}>Our Partners</Text>
         <HStack
@@ -125,7 +126,12 @@ export default function Home() {
       </VStack>
 
       {/* <CollectionCards Section /> */}
-      <VStack fontFamily={"NexaBold"} pt={["2rem", "2rem", "3.5rem"]}>
+      <VStack
+        fontFamily={"NexaBold"}
+        pt={["2rem", "2rem", "3.5rem"]}
+        backdropFilter={"auto"}
+        backdropBlur={["10.22px", "10.22px", "20px"]}
+      >
         <Text fontSize={["1.5rem", "1.5rem", "3rem"]} fontWeight={400}>
           Top Collections
         </Text>
@@ -153,6 +159,8 @@ export default function Home() {
         pt={["2rem", "2rem", "3.5rem"]}
         gap={["1.14rem", "1.14rem", "2.25rem"]}
         px={["1rem", "1rem", "4.62rem"]}
+        backdropFilter={"auto"}
+        backdropBlur={["10.22px", "10.22px", "20px"]}
       >
         <Text fontSize={["1.5rem", "1.5rem", "3rem"]} fontWeight={400}>
           Explore Trending NFTs

@@ -31,18 +31,21 @@ function NftCard() {
         fontFamily={"NexaBold"}
         position={"absolute"}
         bottom={0}
+        left={0}
         borderRadius={[
           "0rem 0rem 0.76644rem 0.76644rem",
           "0rem 0rem 0.76644rem 0.76644rem",
           "0rem 0rem 1.5rem 1.5rem",
         ]}
         bgColor={"#1E1E1E94"}
+        backdropFilter={"auto"}
         backdropBlur={["10.22px", "10.22px", "20px"]}
         width={"100%"}
         height={["4.02388rem", "4.02388rem", "7.875rem"]}
-        padding={["0 0.7rem", "0 0.7rem", "1.93rem 1.38rem"]}
+        padding={["0.9rem 0.7rem", "0.9rem 0.7rem", "1.93rem 1.38rem"]}
         alignItems={"flex-start"}
         gap={"0.1rem"}
+        color={"#FFFFFF"}
       >
         <HStack w={"100%"} justifyContent={"space-between"}>
           <Text
