@@ -10,6 +10,7 @@ import dash from "../../public/images/dash-2 1.png";
 import meta from "../../public/images/Frame 18.png";
 import CollectionCard from "@/components/_collectionCard";
 import NftCard from "@/components/_nftCard";
+import Footer from "@/components/_footer";
 
 export default function Home() {
   return (
@@ -171,6 +172,9 @@ export default function Home() {
           <NftCard />
           <NftCard />
           <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
         </Stack>
         <Stack
           direction={"row"}
@@ -188,6 +192,7 @@ export default function Home() {
           <NftCard />
           <NftCard />
         </Stack>
+
         <Button
           variant={"outline"}
           colorScheme="green"
@@ -206,6 +211,7 @@ export default function Home() {
           <DirArrow color={"#1DB96F"} size={"2vw"} />
         </Button>
       </VStack>
+      <Footer />
     </main>
   );
 }
