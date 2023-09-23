@@ -145,7 +145,67 @@ export default function Home() {
           <CollectionCard />
         </Stack>
       </VStack>
-      <NftCard />
+
+      {/* <NFT Cards Section /> */}
+      <VStack
+        fontFamily={"NexaBold"}
+        pt={["2rem", "2rem", "3.5rem"]}
+        gap={["1.14rem", "1.14rem", "2.25rem"]}
+        px={["1rem", "1rem", "4.62rem"]}
+      >
+        <Text fontSize={["1.5rem", "1.5rem", "3rem"]} fontWeight={400}>
+          Explore Trending NFTs
+        </Text>
+
+        <Stack
+          direction={"row"}
+          flexWrap={["nowrap", "nowrap", "wrap"]}
+          w={"100%"}
+          gap={["0.7rem", "0.7rem", "1.38rem"]}
+          justifyContent={"center"}
+          alignItems={"center"}
+          overflowX={["auto", "auto", "hidden"]}
+        >
+          <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
+        </Stack>
+        <Stack
+          direction={"row"}
+          flexWrap={"nowrap"}
+          display={["flex", "flex", "none"]}
+          w={"100%"}
+          gap={["0.7rem", "0.7rem", "1.38rem"]}
+          justifyContent={"center"}
+          alignItems={"center"}
+          overflowX={"auto"}
+        >
+          <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
+        </Stack>
+        <Button
+          variant={"outline"}
+          colorScheme="green"
+          borderRadius={"1rem"}
+          padding={"1rem"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          gap={["0.2rem", "0.2rem", "0.5rem"]}
+          height={["2.6rem", "2.6rem", "4.4rem"]}
+          alignSelf={"flex-end"}
+        >
+          <Text fontSize={["1rem", "1rem", "1.5rem"]} fontWeight={400}>
+            See More
+          </Text>
+          <DirArrow color={"#1DB96F"} size={"2vw"} />
+        </Button>
+      </VStack>
     </main>
   );
 }
