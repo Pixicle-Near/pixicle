@@ -33,7 +33,8 @@ export default function Home() {
           pl={["1rem", "1rem", "4.62rem"]}
         >
           <Text fontSize={["2.629rem", "2.629rem", "5rem"]} fontWeight={400}>
-            Get the best and popular <Link>NFT collections</Link>
+            Get the best and popular{" "}
+            <Link color={"#1DB96F"}>NFT collections</Link>
           </Text>
           <HStack
             alignItems={"flex-start"}
