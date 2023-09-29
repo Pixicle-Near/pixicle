@@ -1,7 +1,15 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "@/components/_header";
-import { VStack, Text, HStack, Button, Box, Stack } from "@chakra-ui/react";
+import {
+  VStack,
+  Text,
+  HStack,
+  Button,
+  Box,
+  Stack,
+  Link,
+} from "@chakra-ui/react";
 import { DirArrow } from "@/utils/icons";
 import nfts from "../../public/images/group-2.png";
 import bgc from "../../public/images/bitcoin-gocard 1.png";
@@ -25,7 +33,7 @@ export default function Home() {
           pl={["1rem", "1rem", "4.62rem"]}
         >
           <Text fontSize={["2.629rem", "2.629rem", "5rem"]} fontWeight={400}>
-            Get the best and popular NFT collections
+            Get the best and popular <Link>NFT collections</Link>
           </Text>
           <HStack
             alignItems={"flex-start"}
