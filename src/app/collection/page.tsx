@@ -1,8 +1,17 @@
+import Footer from "@/components/_footer";
 import Header from "@/components/_header";
 import ImageHeader from "@/components/_imageHeader";
 import InfoText from "@/components/_infoText";
+import NftCard from "@/components/_nftCard";
 import { Verified } from "@/utils/icons";
-import { HStack, Stack, Text } from "@chakra-ui/react";
+import {
+  HStack,
+  Input,
+  InputGroup,
+  Select,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 
 function Collection() {
   return (
@@ -53,7 +62,78 @@ function Collection() {
             wtext="NEAR"
           />
         </HStack>
+        <Text
+          fontFamily={"NexaBold"}
+          color={"#B3B3B3"}
+          fontSize={"1.5rem"}
+          fontWeight={400}
+          borderLeft={"2px solid #1DB96F"}
+          padding={"0.625rem 1rem"}
+          marginTop={"1rem"}
+        >
+          A community-driven collectibles project featuring art by Burnt Toast.
+          Doodles come in a joyful range of colors, traits and sizes with a
+          collection size of 10,000. Each Doodle allows its owner to vote for
+          experiences and activations paid for by the Doodles Community
+          Treasury.
+        </Text>
+
+        <HStack
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          marginY={"3rem"}
+        >
+          <InfoText
+            fontSize={"1.5rem"}
+            fontWeight={400}
+            gtext="TOTAL VOLUME"
+            wtext="289,000 NEAR"
+          />
+          <InfoText
+            fontSize={"1.5rem"}
+            fontWeight={400}
+            gtext="FLOOR PRICE"
+            wtext="89,325 NEAR"
+          />
+        </HStack>
+        <HStack
+          fontFamily={"NexaBold"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+        >
+          <InputGroup
+            borderRadius={"1rem"}
+            w={"34.25rem"}
+            borderColor={"#B3B3B3"}
+            color={"#B3B3B3"}
+          >
+            <Input borderRadius={"1rem"} type="text" placeholder="Search" />
+          </InputGroup>
+          <Select
+            borderRadius={"1rem"}
+            borderColor={"#B3B3B3"}
+            color={"#B3B3B3"}
+            w={"19.75rem"}
+            placeholder="Price category"
+          ></Select>
+        </HStack>
+        <HStack
+          marginY={"3rem"}
+          alignItems={"center"}
+          gap={"0.94rem"}
+          flexWrap={"wrap"}
+        >
+          <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
+          <NftCard />
+        </HStack>
       </Stack>
+      <Footer />
     </main>
   );
 }
