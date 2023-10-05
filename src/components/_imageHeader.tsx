@@ -1,5 +1,6 @@
 import { Avatar, Stack } from "@chakra-ui/react";
 import collImage from "../../public/images/collHeader.png";
+import collAvatar from "../../public/images/collAvatar.png";
 
 function ImageHeader() {
   return (
@@ -14,8 +15,8 @@ function ImageHeader() {
     >
       <Avatar
         size="2xl"
-        name="Segun Adebayo"
-        src="https://bit.ly/sage-adebayo"
+        name="Doodles"
+        src={collAvatar.src}
         position={"absolute"}
         left={0}
         bottom={"-4rem"}
