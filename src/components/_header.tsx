@@ -1,7 +1,36 @@
+"use client";
+import { Wallet } from "@/utils/Wallet";
 import { Hamburger, WalletIconDesk, WalletIconMob } from "@/utils/icons";
 import { Button, HStack, Text } from "@chakra-ui/react";
+import { useEffect, useMemo, useState } from "react";
 
 function Header() {
+  const [isAuth, setIsAuth] = useState(false);
+
+  const wallet = useMemo(() => {
+    return new Wallet({
+      createAccessKeyFor: "phlay.testnet",
+      network: "testnet",
+    });
+  }, []);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const auth = await wallet.startUp();
+      setIsAuth(auth);
+    };
+    checkAuth();
+  }, [wallet]);
+  const handleAuth = () => {
+    if (isAuth) {
+      // logout
+      wallet.signOut();
+    } else {
+      // login
+      wallet.signIn();
+    }
+    setIsAuth(!isAuth);
+  };
   return (
     <HStack
       fontFamily={"NexaBold"}
@@ -41,10 +70,11 @@ function Header() {
         justifyContent={"center"}
         padding={"1rem"}
         width={"13.75rem"}
+        onClick={handleAuth}
       >
         <WalletIconDesk />
         <Text fontSize={"1.5rem"} fontWeight={400}>
-          Wallet
+          {isAuth ? wallet.accountId : "Wallet"}
         </Text>
       </Button>
 

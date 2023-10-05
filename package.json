@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.11.0",
     "@near-wallet-selector/core": "^8.5.2",
     "@near-wallet-selector/ledger": "^8.5.2",
+    "@near-wallet-selector/modal-ui": "^8.5.3",
     "@near-wallet-selector/my-near-wallet": "^8.5.2",
     "@types/node": "20.6.3",
     "@types/react": "18.2.22",
