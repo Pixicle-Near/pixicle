@@ -17,6 +17,7 @@ function Header() {
   useEffect(() => {
     const checkAuth = async () => {
       const auth = await wallet.startUp();
+      console.log(wallet.balance);
       setIsAuth(auth);
     };
     checkAuth();
@@ -29,7 +30,6 @@ function Header() {
       // login
       wallet.signIn();
     }
-    setIsAuth(!isAuth);
   };
   return (
     <HStack
@@ -73,8 +73,8 @@ function Header() {
         onClick={handleAuth}
       >
         <WalletIconDesk />
-        <Text fontSize={"1.5rem"} fontWeight={400}>
-          {isAuth ? wallet.accountId : "Wallet"}
+        <Text fontSize={isAuth ? "0.7rem" : "1.5rem"} fontWeight={400}>
+          {isAuth ? `${wallet.balance} N | ${wallet.accountId}` : "Wallet"}
         </Text>
       </Button>
 

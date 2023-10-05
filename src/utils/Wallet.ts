@@ -1,6 +1,6 @@
 
 // near api js
-import { providers } from 'near-api-js';
+import { providers, connect, keyStores, utils } from 'near-api-js';
 
 // wallet selector UI
 import '@near-wallet-selector/modal-ui/styles.css';
@@ -15,6 +15,8 @@ import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 
 const THIRTY_TGAS = '30000000000000';
 const NO_DEPOSIT = '0';
+
+
 
 type Constructors = {
         createAccessKeyFor?: string;
@@ -35,6 +37,7 @@ export class Wallet {
   network: NetworkId;
     createAccessKeyFor: any;
     accountId: any;
+    balance: any;
 
     
   constructor({ createAccessKeyFor= "phlay.testnet", network = "testnet" }: Constructors) {
@@ -54,11 +57,25 @@ export class Wallet {
       setupLedger({ iconUrl: LedgerIconUrl.src })],
     });
 
-    const isSignedIn = this.walletSelector.isSignedIn();
+      const isSignedIn = this.walletSelector.isSignedIn();
 
+      const myKeyStore = new keyStores.BrowserLocalStorageKeyStore();
+
+      const connectionConfig = {
+        networkId: "testnet",
+        keyStore: myKeyStore, // first create a key store 
+        nodeUrl: "https://rpc.testnet.near.org",
+        walletUrl: "https://wallet.testnet.near.org",
+        helperUrl: "https://helper.testnet.near.org",
+        explorerUrl: "https://explorer.testnet.near.org",
+      };
+    const nearConnection = await connect(connectionConfig);
     if (isSignedIn) {
       this.wallet = await this.walletSelector.wallet();
-      this.accountId = this.walletSelector.store.getState().accounts[0].accountId;
+        this.accountId = this.walletSelector.store.getState().accounts[0].accountId;
+        this.balance = await nearConnection.account(this.accountId);
+        this.balance = await this.balance.getAccountBalance();
+        this.balance = utils.format.formatNearAmount(this.balance.available, 2);
     }
 
     return isSignedIn;
