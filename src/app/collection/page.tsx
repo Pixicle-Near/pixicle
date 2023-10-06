@@ -12,6 +12,8 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import collImage from "../../../public/images/collHeader.png";
+import collAvatar from "../../../public/images/collAvatar.png";
 
 function Collection() {
   return (
@@ -20,7 +22,7 @@ function Collection() {
       <Stack
         padding={["0.98rem 0.88rem", "0.98rem 0.88rem", "1.88rem 4.63rem"]}
       >
-        <ImageHeader />
+        <ImageHeader header={collImage} avatar={collAvatar} />
         <HStack
           fontFamily={"NexaBold"}
           paddingTop={"4.5rem"}

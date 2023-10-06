@@ -1,11 +1,14 @@
 import { Avatar, Stack } from "@chakra-ui/react";
-import collImage from "../../public/images/collHeader.png";
-import collAvatar from "../../public/images/collAvatar.png";
+import { StaticImageData } from "next/image";
 
-function ImageHeader() {
+type ImageHeaderProps = {
+  header: StaticImageData;
+  avatar: StaticImageData;
+};
+function ImageHeader({ header, avatar }: ImageHeaderProps) {
   return (
     <Stack
-      backgroundImage={`url(${collImage.src})`}
+      backgroundImage={`url(${header.src})`}
       backgroundRepeat={"no-repeat"}
       backgroundPosition={"center"}
       backgroundSize={"cover"}
@@ -16,7 +19,7 @@ function ImageHeader() {
       <Avatar
         size="2xl"
         name="Doodles"
-        src={collAvatar.src}
+        src={avatar.src}
         position={"absolute"}
         left={0}
         bottom={"-4rem"}

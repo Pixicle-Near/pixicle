@@ -17,6 +17,8 @@ import {
   useClipboard,
 } from "@chakra-ui/react";
 import { useContext } from "react";
+import profHeader from "../../../public/images/profHeader.png";
+import profAvatar from "../../../public/images/profAvatar.png";
 
 function Profile() {
   const { wallet } = useContext(MarketContext);
@@ -31,7 +33,7 @@ function Profile() {
         padding={["0.98rem 0.88rem", "0.98rem 0.88rem", "1.88rem 4.63rem"]}
       >
         {/* {Image Header} */}
-        <ImageHeader />
+        <ImageHeader header={profHeader} avatar={profAvatar} />
         <HStack
           fontFamily={"NexaBold"}
           paddingTop={"4.5rem"}
