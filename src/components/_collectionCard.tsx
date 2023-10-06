@@ -1,8 +1,7 @@
 import { Box, HStack, Text, VStack } from "@chakra-ui/react";
-import bayc from "../../public/images/bayc.png";
 import Image from "next/image";
 
-function CollectionCard() {
+function CollectionCard({ collection }: { collection: any }) {
   return (
     <HStack
       w={["100%"]}
@@ -24,7 +23,7 @@ function CollectionCard() {
     >
       <Box display={["none", "none", "block"]}>
         <Image
-          src={bayc}
+          src={collection.image}
           alt="bayc"
           style={{
             width: "8.67188rem",
@@ -35,7 +34,7 @@ function CollectionCard() {
       </Box>
       <Box display={["block", "block", "none"]}>
         <Image
-          src={bayc}
+          src={collection.image}
           alt="bayc"
           style={{
             width: "5.35713rem",
@@ -52,7 +51,7 @@ function CollectionCard() {
         color={"#FFFFFF"}
       >
         <Text fontSize={["1rem", "1rem", "2rem"]} fontWeight={400}>
-          Bored Ape Yacht Club
+          {collection.name || "Bored Ape Yacht Club"}
         </Text>
         <HStack color={"#B3B3B3"} w={"100%"} justifyContent={"space-between"}>
           <Text
@@ -73,13 +72,13 @@ function CollectionCard() {
             fontSize={["0.92663rem", "0.92663rem", "1.5rem"]}
             fontWeight={400}
           >
-            16.02 NEAR
+            {collection.floor || 16.02} NEAR
           </Text>
           <Text
             fontSize={["0.92663rem", "0.92663rem", "1.5rem"]}
             fontWeight={400}
           >
-            11k NEAR
+            {collection.volume || "11k"} NEAR
           </Text>
         </HStack>
       </VStack>

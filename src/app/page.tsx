@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "@/components/_header";
@@ -19,8 +20,11 @@ import meta from "../../public/images/Frame 18.png";
 import CollectionCard from "@/components/_collectionCard";
 import NftCard from "@/components/_nftCard";
 import Footer from "@/components/_footer";
+import { MarketContext } from "@/context/MarketStore";
+import { useContext } from "react";
 
 export default function Home() {
+  const { categories } = useContext(MarketContext);
   return (
     <main className={styles.main}>
       <Header />
@@ -153,12 +157,9 @@ export default function Home() {
           alignItems={"center"}
           justifyContent={"center"}
         >
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
+          {categories.map((category: any) => (
+            <CollectionCard key={category.id} collection={category} />
+          ))}
         </Stack>
       </VStack>
 
