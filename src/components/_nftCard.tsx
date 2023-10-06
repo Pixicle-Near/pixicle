@@ -2,7 +2,7 @@ import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import bay from "../../public/images/bay.png";
 
-function NftCard() {
+function NftCard({ nft }: { nft: any }) {
   return (
     <Box
       borderRadius={[
@@ -17,7 +17,7 @@ function NftCard() {
       position={"relative"}
     >
       <Image
-        src={bay}
+        src={nft.image || bay}
         alt="bay"
         style={{
           width: "100%",
@@ -52,7 +52,7 @@ function NftCard() {
             fontSize={["0.59869rem", "0.59869rem", "1.17169rem"]}
             fontWeight={400}
           >
-            Bored Ape Yacht
+            {nft.name || "Bored Ape Yacht"}
           </Text>
           <Text
             fontSize={["0.71844rem", "0.71844rem", "1.406rem"]}

@@ -21,7 +21,7 @@ import profHeader from "../../../public/images/profHeader.png";
 import profAvatar from "../../../public/images/profAvatar.png";
 
 function Profile() {
-  const { wallet } = useContext(MarketContext);
+  const { wallet, nfts } = useContext(MarketContext);
   const { onCopy } = useClipboard(wallet?.accountId);
 
   return (
@@ -153,14 +153,9 @@ function Profile() {
           gap={"0.94rem"}
           flexWrap={"wrap"}
         >
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
+          {nfts.slice(4, 8).map((nft: any) => (
+            <NftCard key={nft.id} nft={nft} />
+          ))}
         </HStack>
       </Stack>
       {/* {Footer} */}

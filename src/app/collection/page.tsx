@@ -14,8 +14,11 @@ import {
 } from "@chakra-ui/react";
 import collImage from "../../../public/images/collHeader.png";
 import collAvatar from "../../../public/images/collAvatar.png";
+import { MarketContext } from "@/context/MarketStore";
+import { useContext } from "react";
 
 function Collection() {
+  const { nfts } = useContext(MarketContext);
   return (
     <main>
       <Header />
@@ -140,14 +143,9 @@ function Collection() {
           gap={"0.94rem"}
           flexWrap={"wrap"}
         >
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
+          {nfts.slice(4, 8).map((nft: any) => (
+            <NftCard key={nft.id} nft={nft} />
+          ))}
         </HStack>
       </Stack>
       <Footer />

@@ -12,7 +12,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { DirArrow } from "@/utils/icons";
-import nfts from "../../public/images/group-2.png";
+import nft from "../../public/images/group-2.png";
 import bgc from "../../public/images/bitcoin-gocard 1.png";
 import eth from "../../public/images/ethereum 1.png";
 import dash from "../../public/images/dash-2 1.png";
@@ -24,7 +24,7 @@ import { MarketContext } from "@/context/MarketStore";
 import { useContext } from "react";
 
 export default function Home() {
-  const { categories } = useContext(MarketContext);
+  const { categories, nfts } = useContext(MarketContext);
   return (
     <main className={styles.main}>
       <Header />
@@ -82,14 +82,14 @@ export default function Home() {
         <Box display={["none", "block"]}>
           <Image
             className={styles.nfts}
-            src={nfts}
+            src={nft}
             alt="nfts"
             style={{ width: "120rem" }}
           />
         </Box>
         <Box display={["block", "none"]}>
           <Image
-            src={nfts}
+            src={nft}
             alt="nfts"
             style={{
               width: "120rem",
@@ -185,14 +185,9 @@ export default function Home() {
           alignItems={"center"}
           overflowX={["auto", "auto", "hidden"]}
         >
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
+          {nfts.slice(0, 8).map((nft: any) => (
+            <NftCard key={nft.id} nft={nft} />
+          ))}
         </Stack>
         <Stack
           direction={"row"}
@@ -204,11 +199,9 @@ export default function Home() {
           alignItems={"center"}
           overflowX={"auto"}
         >
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
-          <NftCard />
+          {nfts.slice(0, 5).map((nft: any) => (
+            <NftCard key={nft.id} nft={nft} />
+          ))}
         </Stack>
 
         <Button
