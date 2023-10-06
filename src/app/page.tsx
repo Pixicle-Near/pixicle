@@ -73,7 +73,7 @@ export default function Home() {
               height={["2.6rem", "2.6rem", "4.4rem"]}
             >
               <Text fontSize={["1rem", "1rem", "1.5rem"]} fontWeight={400}>
-                Create wallet
+                Create Token
               </Text>
               <DirArrow color={"#FFFFFF"} size={"2.5vw"} />
             </Button>
