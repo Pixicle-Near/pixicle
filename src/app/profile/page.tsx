@@ -4,6 +4,7 @@ import Header from "@/components/_header";
 import ImageHeader from "@/components/_imageHeader";
 import InfoText from "@/components/_infoText";
 import NftCard from "@/components/_nftCard";
+import { MarketContext } from "@/context/MarketStore";
 import { Clipboard, GreyVerified, SearchIcon } from "@/utils/icons";
 import {
   Button,
@@ -15,15 +16,21 @@ import {
   Text,
   useClipboard,
 } from "@chakra-ui/react";
+import { useContext } from "react";
 
 function Profile() {
-  const { onCopy } = useClipboard("phlay.testnet");
+  const { wallet } = useContext(MarketContext);
+  const { onCopy } = useClipboard(wallet?.accountId);
+
   return (
     <main>
+      {/* {Header} */}
       <Header />
+      {/* {Main Content} */}
       <Stack
         padding={["0.98rem 0.88rem", "0.98rem 0.88rem", "1.88rem 4.63rem"]}
       >
+        {/* {Image Header} */}
         <ImageHeader />
         <HStack
           fontFamily={"NexaBold"}
@@ -46,7 +53,7 @@ function Profile() {
               fontSize={["1rem", "1rem", "1.5rem"]}
               fontWeight={400}
               gtext="WALLET ADDRESS"
-              wtext="phlay.testnet"
+              wtext={wallet?.accountId}
             />
             <Clipboard handleCopy={onCopy} />
           </HStack>
@@ -57,6 +64,7 @@ function Profile() {
             wtext="Oct 2021"
           />
         </HStack>
+        {/* {User Info} */}
         <Text
           fontFamily={"NexaBold"}
           color={"#B3B3B3"}
@@ -72,7 +80,7 @@ function Profile() {
           experiences and activations paid for by the Doodles Community
           Treasury.
         </Text>
-
+        {/* {User Stats} */}
         <HStack
           alignItems={"center"}
           justifyContent={"space-between"}
@@ -93,6 +101,7 @@ function Profile() {
             wdec={true}
           />
         </HStack>
+        {/* {User Collections} */}
         <HStack
           fontFamily={"NexaBold"}
           alignItems={"center"}
@@ -135,6 +144,7 @@ function Profile() {
             </Text>
           </Button>
         </HStack>
+        {/* {User NFT Cards} */}
         <HStack
           marginY={"3rem"}
           alignItems={"center"}
@@ -151,6 +161,7 @@ function Profile() {
           <NftCard />
         </HStack>
       </Stack>
+      {/* {Footer} */}
       <Footer />
     </main>
   );

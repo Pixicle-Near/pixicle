@@ -1,36 +1,12 @@
 "use client";
-import { Wallet } from "@/utils/Wallet";
+import { MarketContext } from "@/context/MarketStore";
 import { Hamburger, WalletIconDesk, WalletIconMob } from "@/utils/icons";
 import { Button, HStack, Text } from "@chakra-ui/react";
-import { useEffect, useMemo, useState } from "react";
+import { useContext } from "react";
 
 function Header() {
-  const [isAuth, setIsAuth] = useState(false);
+  const { isAuth, handleAuth, wallet } = useContext(MarketContext);
 
-  const wallet = useMemo(() => {
-    return new Wallet({
-      createAccessKeyFor: "phlay.testnet",
-      network: "testnet",
-    });
-  }, []);
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const auth = await wallet.startUp();
-      console.log(wallet.balance);
-      setIsAuth(auth);
-    };
-    checkAuth();
-  }, [wallet]);
-  const handleAuth = () => {
-    if (isAuth) {
-      // logout
-      wallet.signOut();
-    } else {
-      // login
-      wallet.signIn();
-    }
-  };
   return (
     <HStack
       fontFamily={"NexaBold"}
@@ -74,7 +50,7 @@ function Header() {
       >
         <WalletIconDesk />
         <Text fontSize={isAuth ? "0.7rem" : "1.5rem"} fontWeight={400}>
-          {isAuth ? `${wallet.balance} N | ${wallet.accountId}` : "Wallet"}
+          {isAuth ? `${wallet?.balance} N | ${wallet?.accountId}` : "Wallet"}
         </Text>
       </Button>
 
