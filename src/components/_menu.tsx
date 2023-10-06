@@ -24,10 +24,11 @@ function MenuComp({ Icon, menulist }: MenuCompProps) {
         {menulist.map((menuItem) => (
           <MenuItem
             backgroundColor={"transparent"}
-            _hover={{ backgroundColor: "#000000", backdropBlur(theme) {} }}
-            key={menuItem}
+            _hover={{ backgroundColor: "#1DB96F", backdropBlur(theme) {} }}
+            key={menuItem.info}
+            onClick={menuItem.action}
           >
-            {menuItem}
+            {menuItem.info}
           </MenuItem>
         ))}
       </MenuList>

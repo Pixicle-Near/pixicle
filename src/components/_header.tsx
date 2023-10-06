@@ -4,9 +4,30 @@ import { Hamburger, WalletIconDesk, WalletIconMob } from "@/utils/icons";
 import { Button, HStack, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import MenuComp from "./_menu";
+import { MenuListProps } from "@/utils/types";
 
 function Header() {
-  const { isAuth, handleAuth, wallet } = useContext(MarketContext);
+  const { isAuth, handleAuth, wallet, handleRouting } =
+    useContext(MarketContext);
+
+  const walletMenulist: MenuListProps[] = [
+    {
+      info: `Profile | ${wallet?.balance} N | ${wallet?.accountId}`,
+      action: () => {
+        handleRouting && handleRouting(`profile`);
+      },
+    },
+    { info: "logout", action: () => wallet?.signOut() },
+  ];
+  const menulist: MenuListProps[] = [
+    { info: "Home", action: () => handleRouting && handleRouting(``) },
+    {
+      info: "Market Place",
+      action: () => handleRouting && handleRouting(`market`),
+    },
+    { info: "Trends", action: () => handleRouting && handleRouting(`trends`) },
+    { info: "FAQ", action: () => handleRouting && handleRouting(`faq`) },
+  ];
 
   return (
     <HStack
@@ -61,18 +82,15 @@ function Header() {
         alignItems={"center"}
         gap={"1rem"}
       >
-        <MenuComp
-          Icon={WalletIconMob}
-          menulist={[
-            `Profile | 
-          ${wallet?.balance} N | ${wallet?.accountId}`,
-            "logout",
-          ]}
-        />
-        <MenuComp
-          Icon={Hamburger}
-          menulist={["Home", "Market place", "Trends", "FAQ"]}
-        />
+        {isAuth ? (
+          <MenuComp Icon={WalletIconMob} menulist={walletMenulist} />
+        ) : (
+          <span onClick={handleAuth}>
+            <WalletIconMob />
+          </span>
+        )}
+
+        <MenuComp Icon={Hamburger} menulist={menulist} />
       </HStack>
     </HStack>
   );

@@ -27,6 +27,7 @@ export type ImageHeaderProps = {
 export type MarketContextType = {
     wallet?: Wallet;
     handleAuth?: () => void;
+    handleRouting?: (route: string) => void;
     isAuth?: boolean;
     categories?: any;
     nfts?: any;
@@ -47,5 +48,10 @@ deposit?: string;
 
 export type MenuCompProps = {
     Icon: () => React.ReactNode;
-    menulist: string[];
+    menulist: MenuListProps[];
+}
+
+export type MenuListProps = {
+    info: string;
+    action: () => void;
 }
