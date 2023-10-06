@@ -3,6 +3,7 @@ import { MarketContext } from "@/context/MarketStore";
 import { Hamburger, WalletIconDesk, WalletIconMob } from "@/utils/icons";
 import { Button, HStack, Text } from "@chakra-ui/react";
 import { useContext } from "react";
+import MenuComp from "./_menu";
 
 function Header() {
   const { isAuth, handleAuth, wallet } = useContext(MarketContext);
@@ -60,8 +61,18 @@ function Header() {
         alignItems={"center"}
         gap={"1rem"}
       >
-        <WalletIconMob />
-        <Hamburger />
+        <MenuComp
+          Icon={WalletIconMob}
+          menulist={[
+            `Profile | 
+          ${wallet?.balance} N | ${wallet?.accountId}`,
+            "logout",
+          ]}
+        />
+        <MenuComp
+          Icon={Hamburger}
+          menulist={["Home", "Market place", "Trends", "FAQ"]}
+        />
       </HStack>
     </HStack>
   );

@@ -44,3 +44,8 @@ args?: any;
 gas?: string;
 deposit?: string;
 }
+
+export type MenuCompProps = {
+    Icon: () => React.ReactNode;
+    menulist: string[];
+}
