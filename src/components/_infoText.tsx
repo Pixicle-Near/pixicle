@@ -1,12 +1,6 @@
-import { HStack, Text, border } from "@chakra-ui/react";
+import { InfoTextProps } from "@/utils/types";
+import { HStack, Text } from "@chakra-ui/react";
 
-type InfoTextProps = {
-  fontSize: string[];
-  fontWeight: number;
-  gtext: string;
-  wtext: string;
-  wdec?: boolean;
-};
 function InfoText({ fontSize, fontWeight, gtext, wtext, wdec }: InfoTextProps) {
   return (
     <HStack

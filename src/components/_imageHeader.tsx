@@ -1,10 +1,6 @@
+import { ImageHeaderProps } from "@/utils/types";
 import { Avatar, Stack } from "@chakra-ui/react";
-import { StaticImageData } from "next/image";
 
-type ImageHeaderProps = {
-  header: StaticImageData;
-  avatar: StaticImageData;
-};
 function ImageHeader({ header, avatar }: ImageHeaderProps) {
   return (
     <Stack

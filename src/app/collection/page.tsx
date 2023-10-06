@@ -1,3 +1,4 @@
+"use client";
 import Footer from "@/components/_footer";
 import Header from "@/components/_header";
 import ImageHeader from "@/components/_imageHeader";
@@ -143,7 +144,7 @@ function Collection() {
           gap={"0.94rem"}
           flexWrap={"wrap"}
         >
-          {nfts.slice(4, 8).map((nft: any) => (
+          {nfts.slice(5, 9).map((nft: any) => (
             <NftCard key={nft.id} nft={nft} />
           ))}
         </HStack>

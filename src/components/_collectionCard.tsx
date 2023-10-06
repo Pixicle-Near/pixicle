@@ -1,7 +1,8 @@
+import { collectionCardprops } from "@/utils/types";
 import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 
-function CollectionCard({ collection }: { collection: any }) {
+function CollectionCard({ collection }: collectionCardprops) {
   return (
     <HStack
       w={["100%"]}

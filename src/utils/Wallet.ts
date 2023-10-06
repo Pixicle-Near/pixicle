@@ -12,24 +12,14 @@ import MyNearIconUrl from '@near-wallet-selector/my-near-wallet/assets/my-near-w
 import { NetworkId, setupWalletSelector } from '@near-wallet-selector/core';
 import { setupLedger } from '@near-wallet-selector/ledger';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
+import { Constructors, contractCall } from './types';
 
 const THIRTY_TGAS = '30000000000000';
 const NO_DEPOSIT = '0';
 
 
 
-type Constructors = {
-        createAccessKeyFor?: string;
-        network?: NetworkId;
-}
 
-type contractCall = {
-    contractId: string;
-    method: string;
-    args?: any;
-    gas?: string;
-    deposit?: string;
-}
 // Wallet that simplifies using the wallet selector
 export class Wallet {
   walletSelector: any;

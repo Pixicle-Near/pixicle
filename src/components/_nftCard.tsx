@@ -1,8 +1,9 @@
 import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import bay from "../../public/images/bay.png";
+import { nftCardprops } from "@/utils/types";
 
-function NftCard({ nft }: { nft: any }) {
+function NftCard({ nft }: nftCardprops) {
   return (
     <Box
       borderRadius={[
