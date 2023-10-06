@@ -1,8 +1,12 @@
+import { MarketContext } from "@/context/MarketStore";
 import { collectionCardprops } from "@/utils/types";
 import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
+import { useContext } from "react";
 
 function CollectionCard({ collection }: collectionCardprops) {
+  const { handleRouting } = useContext(MarketContext);
+
   return (
     <HStack
       w={["100%"]}
@@ -21,6 +25,8 @@ function CollectionCard({ collection }: collectionCardprops) {
         "1.22rem 0.85rem 0.65rem",
         "1.37rem 1.37rem 1.22rem",
       ]}
+      cursor={"pointer"}
+      onClick={() => handleRouting && handleRouting("collection")}
     >
       <Box display={["none", "none", "block"]}>
         <Image
