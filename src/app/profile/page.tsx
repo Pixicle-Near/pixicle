@@ -9,6 +9,7 @@ import { Clipboard, GreyVerified, SearchIcon } from "@/utils/icons";
 import {
   Button,
   HStack,
+  Heading,
   Input,
   InputGroup,
   Select,
@@ -27,7 +28,12 @@ function Profile() {
   const router = useRouter();
 
   if (!isAuth) {
-    router.push("/");
+    // router.push("/");
+    return (
+      <Stack>
+        <Heading>Not Found</Heading>
+      </Stack>
+    );
   } else {
     return (
       <main>
