@@ -28,9 +28,11 @@ export type MarketContextType = {
     wallet?: Wallet;
     handleAuth?: () => void;
     handleRouting?: (route: string) => void;
+    handleUserData?: () => Promise<any>;
     isAuth?: boolean;
     categories?: any;
     nfts?: any;
+    tokens?: any;
 };
   
 export type Constructors = {

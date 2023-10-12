@@ -24,7 +24,7 @@ import { MarketContext } from "@/context/MarketStore";
 import { useContext } from "react";
 
 export default function Home() {
-  const { categories, nfts } = useContext(MarketContext);
+  const { categories, tokens } = useContext(MarketContext);
   return (
     <main className={styles.main}>
       <Header />
@@ -185,7 +185,7 @@ export default function Home() {
           alignItems={"center"}
           overflowX={["auto", "auto", "hidden"]}
         >
-          {nfts.slice(0, 8).map((nft: any) => (
+          {tokens.slice(0, 8).map((nft: any) => (
             <NftCard key={nft.id} nft={nft} />
           ))}
         </Stack>
@@ -199,7 +199,7 @@ export default function Home() {
           alignItems={"center"}
           overflowX={"auto"}
         >
-          {nfts.slice(0, 5).map((nft: any) => (
+          {tokens.slice(0, 5).map((nft: any) => (
             <NftCard key={nft.id} nft={nft} />
           ))}
         </Stack>

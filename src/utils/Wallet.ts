@@ -17,6 +17,7 @@ import { Constructors, contractCall } from './types';
 const THIRTY_TGAS = '30000000000000';
 const NO_DEPOSIT = '0';
 
+const Contract_Address = process.env.Contract_Address;
 
 
 
@@ -30,7 +31,7 @@ export class Wallet {
     balance: any;
 
     
-  constructor({ createAccessKeyFor= "phlay.testnet", network = "testnet" }: Constructors) {
+  constructor({ createAccessKeyFor= "pixicle.phlay.testnet", network = "testnet" }: Constructors) {
     // Login to a wallet passing a contractId will create a local
     // key, so the user skips signing non-payable transactions.
     // Omitting the accountId will result in the user being
@@ -87,7 +88,7 @@ export class Wallet {
 
   // Make a read-only call to retrieve information from the network
   async viewMethod({ contractId, method, args = {} }: contractCall) {
-    const { network } = this.walletSelector.options;
+    const { network } = this.walletSelector?.options;
     const provider = new providers.JsonRpcProvider({ url: network.nodeUrl });
 
     let res: any = await provider.query({

@@ -18,11 +18,13 @@ function NftCard({ nft }: nftCardprops) {
       position={"relative"}
     >
       <Image
-        src={nft.image || bay}
+        src={nft?.metadata?.media || bay}
         alt="bay"
+        width={300}
+        height={600}
         style={{
-          width: "100%",
-          height: "100%",
+          minWidth: "100%",
+          minHeight: "100%",
           objectFit: "cover",
           objectPosition: "center",
           borderRadius: "0rem 0rem 1.5rem 1.5rem",
@@ -53,7 +55,7 @@ function NftCard({ nft }: nftCardprops) {
             fontSize={["0.59869rem", "0.59869rem", "1.17169rem"]}
             fontWeight={400}
           >
-            {nft.name || "Bored Ape Yacht"}
+            {nft?.metadata?.title || "Bored Ape Yacht"}
           </Text>
           <Text
             fontSize={["0.71844rem", "0.71844rem", "1.406rem"]}

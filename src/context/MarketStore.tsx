@@ -12,10 +12,11 @@ export const MarketContext = createContext(value);
 const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuth, setIsAuth] = useState(false);
   const router = useRouter();
+  const [tokens, setTokens] = useState([]);
 
   const wallet = useMemo(() => {
     return new Wallet({
-      createAccessKeyFor: "phlay.testnet",
+      createAccessKeyFor: "pix.phlay.testnet",
       network: "testnet",
     });
   }, []);
@@ -29,14 +30,42 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
     checkAuth();
   }, [wallet]);
 
+  useMemo(() => {
+    const getTokens = async () => {
+      await wallet.startUp();
+      const tokens = await wallet.viewMethod({
+        contractId: "pix.phlay.testnet",
+        method: "nft_tokens",
+      });
+      console.log(tokens);
+      setTokens(tokens);
+    };
+    getTokens();
+  }, [wallet]);
+
+  console.log(tokens);
+
   const handleAuth = () => {
     if (isAuth) {
       // logout
-      wallet.signOut();
+      handleRouting("profile");
     } else {
       // login
       wallet.signIn();
     }
+  };
+
+  const handleUserData = async () => {
+    // get user data
+
+    const userTokens = await wallet.viewMethod({
+      contractId: "pix.phlay.testnet",
+      method: "nft_tokens_for_owner",
+      args: { account_id: wallet.accountId, limit: 5 },
+    });
+
+    console.log(userTokens);
+    return userTokens;
   };
 
   const handleRouting = (route: string) => {
@@ -45,7 +74,16 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <MarketContext.Provider
-      value={{ wallet, handleAuth, isAuth, categories, nfts, handleRouting }}
+      value={{
+        wallet,
+        handleAuth,
+        isAuth,
+        categories,
+        nfts,
+        handleRouting,
+        handleUserData,
+        tokens,
+      }}
     >
       {children}
     </MarketContext.Provider>
