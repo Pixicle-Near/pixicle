@@ -5,28 +5,39 @@ import ImageHeader from "@/components/_imageHeader";
 import InfoText from "@/components/_infoText";
 import NftCard from "@/components/_nftCard";
 import { MarketContext } from "@/context/MarketStore";
-import { Clipboard, GreyVerified, SearchIcon } from "@/utils/icons";
+import { Clipboard, DirArrow, GreyVerified, SearchIcon } from "@/utils/icons";
 import {
   Button,
   HStack,
-  Heading,
   Input,
   InputGroup,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
   Stack,
   Text,
   useClipboard,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 import profHeader from "../../../public/images/profHeader.png";
 import profAvatar from "../../../public/images/profAvatar.png";
 import { useRouter } from "next/navigation";
+import CreateCollection from "@/components/_createCollection";
+import CreateNFT from "@/components/_createNFT";
 
 function Profile() {
-  const { wallet, nfts, isAuth, handleUserData } = useContext(MarketContext);
+  const { wallet, isAuth, handleUserData } = useContext(MarketContext);
   const { onCopy } = useClipboard(wallet?.accountId);
   const router = useRouter();
   const [userTokens, setUserTokens]: any[] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [mHeading, setMHeading] = useState("Create");
 
   useEffect(() => {
     if (isAuth) {
@@ -37,6 +48,76 @@ function Profile() {
       router.push("/");
     }
   }, [isAuth, handleUserData, router]);
+
+  // Overlay For Modal
+  const Overlay = () => (
+    <ModalOverlay
+      bg="blackAlpha.300"
+      backdropFilter="blur(10px) hue-rotate(90deg)"
+    />
+  );
+
+  // Options For Create Modal
+  const CreateOptions = () => {
+    return (
+      <Stack
+        w={"100%"}
+        h={"100%"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        gap={"1rem"}
+        color={"#000000"}
+        position={"relative"}
+      >
+        <HStack
+          w={"100%"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          gap={"1rem"}
+          fontFamily={"NexaBold"}
+          boxShadow={"dark-lg"}
+          p={["1rem", "1rem", "1.2rem"]}
+          borderRadius={"lg"}
+          cursor={"pointer"}
+          backgroundColor={"#FFFFFF"}
+          onClick={() =>
+            handleSelection("Drop a collection", <CreateCollection />)
+          }
+        >
+          <Text fontSize={["1rem", "1rem", "1.5rem"]} fontWeight={400}>
+            Drop a Collection
+          </Text>
+          <DirArrow size="1.5rem" color="#000000" />
+        </HStack>
+        <HStack
+          w={"100%"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          gap={"1rem"}
+          fontFamily={"NexaBold"}
+          boxShadow={"dark-lg"}
+          p={["1rem", "1rem", "1.2rem"]}
+          borderRadius={"lg"}
+          cursor={"pointer"}
+          backgroundColor={"#FFFFFF"}
+          onClick={() => handleSelection("Create NFT", <CreateNFT />)}
+        >
+          <Text fontSize={["1rem", "1rem", "1.5rem"]} fontWeight={400}>
+            Mint NFT
+          </Text>
+          <DirArrow size="1.5rem" color="#000000" />
+        </HStack>
+      </Stack>
+    );
+  };
+
+  const [mBody, setMBody] = useState(<CreateOptions />);
+
+  function handleSelection(option: string, Alement: ReactElement<any, any>) {
+    setMHeading(option);
+    setMBody(Alement);
+  }
+
   return (
     <main>
       {/* {Header} */}
@@ -45,6 +126,32 @@ function Profile() {
       <Stack
         padding={["0.98rem 0.88rem", "0.98rem 0.88rem", "1.88rem 4.63rem"]}
       >
+        {/* {Modal} */}
+        <Modal isCentered isOpen={isOpen} onClose={onClose}>
+          <Overlay />
+          <ModalContent>
+            <ModalHeader
+              color={"#000000"}
+              fontSize={["1.5rem", "1.5rem", "2.25rem"]}
+              fontFamily={"NexaBold"}
+            >
+              {mHeading}
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>{mBody}</ModalBody>
+            <ModalFooter>
+              <Button
+                onClick={() => {
+                  onClose();
+                  setMBody(<CreateOptions />);
+                  setMHeading("Create");
+                }}
+              >
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
         {/* {Image Header} */}
         <ImageHeader header={profHeader} avatar={profAvatar} />
         <HStack
@@ -150,12 +257,12 @@ function Profile() {
               placeholder="Search"
             />
           </InputGroup>
-          <Button variant={"solid"} colorScheme="green">
+          <Button variant={"solid"} colorScheme="green" onClick={onOpen}>
             <Text
               padding={["0.3rem", "0.3rem", "0.625rem"]}
               fontSize={["0.8rem", "0.8rem", "1rem"]}
             >
-              &#43; Add Collection
+              &#43; Create
             </Text>
           </Button>
         </HStack>
