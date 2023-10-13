@@ -1,9 +1,12 @@
-import { Box, HStack, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import bay from "../../public/images/bay.png";
 import { nftCardprops } from "@/utils/types";
+import { useState } from "react";
 
 function NftCard({ nft }: nftCardprops) {
+  const [isHover, setIsHover] = useState(false);
+
   return (
     <Box
       borderRadius={[
@@ -16,12 +19,14 @@ function NftCard({ nft }: nftCardprops) {
       w={["10.28319rem", "10.28319rem", "20.125rem"]}
       h={["13.98769rem", "13.98769rem", "27.375rem"]}
       position={"relative"}
+      cursor={"pointer"}
+      zIndex={20}
     >
       <Image
         src={nft?.metadata?.media || bay}
         alt="bay"
-        width={300}
-        height={600}
+        width={600}
+        height={1200}
         style={{
           minWidth: "100%",
           minHeight: "100%",
@@ -49,13 +54,19 @@ function NftCard({ nft }: nftCardprops) {
         alignItems={"flex-start"}
         gap={"0.1rem"}
         color={"#FFFFFF"}
+        transition={"all 0.5s ease-in-out"}
+        _hover={{ bgColor: "#FFFFFF", color: "#1DB96F" }}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+        zIndex={20}
       >
         <HStack w={"100%"} justifyContent={"space-between"}>
           <Text
             fontSize={["0.59869rem", "0.59869rem", "1.17169rem"]}
             fontWeight={400}
           >
-            {nft?.metadata?.title || "Bored Ape Yacht"}
+            {nft?.metadata?.title.slice(0, 12) || "Bored Ape Yacht"}
+            {nft?.metadata?.title.length > 12 && "..."}
           </Text>
           <Text
             fontSize={["0.71844rem", "0.71844rem", "1.406rem"]}
@@ -64,12 +75,36 @@ function NftCard({ nft }: nftCardprops) {
             2637
           </Text>
         </HStack>
-        <Text
-          fontSize={["0.95788rem", "0.95788rem", "1.875rem"]}
-          fontWeight={400}
+        <HStack
+          position={"relative"}
+          alignItems={"center"}
+          gap={"1rem"}
+          justifyContent={"space-between"}
+          width={"100%"}
         >
-          77.234 NEAR
-        </Text>
+          <Button
+            variant={"solid"}
+            colorScheme="green"
+            display={isHover ? ["none", "none", "block"] : "none"}
+            transition={"all 0.5s ease-in-out"}
+          >
+            <Text
+              fontSize={["0.59869rem", "0.59869rem", "1.17169rem"]}
+              fontWeight={400}
+            >
+              Buy
+            </Text>
+          </Button>
+          <Text
+            fontSize={
+              isHover ? "1.5rem" : ["0.95788rem", "0.95788rem", "1.875rem"]
+            }
+            fontWeight={400}
+            transition={"all 1s ease-out"}
+          >
+            77.234 NEAR
+          </Text>
+        </HStack>
       </VStack>
     </Box>
   );
