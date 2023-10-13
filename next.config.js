@@ -12,7 +12,25 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "nftstorage.link",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.nftstorage.link",
+        port: "",
+        pathname: "/**",
+      },
     ],
+  },
+  webpack5: true,
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false, path: false };
+
+    return config;
   },
 };
 

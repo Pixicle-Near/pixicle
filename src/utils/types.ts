@@ -45,7 +45,7 @@ contractId: string;
 method: string;
 args?: any;
 gas?: string;
-deposit?: string;
+deposit?: any;
 }
 
 export type MenuCompProps = {
