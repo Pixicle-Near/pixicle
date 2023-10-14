@@ -1,11 +1,62 @@
+import { MarketContext } from "@/context/MarketStore";
+import { storeNFT } from "@/utils/upload";
 import { Avatar, Button, HStack, Input, Stack, Text } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { utils } from "near-api-js";
+import { useContext, useRef, useState } from "react";
 
 const CreateCollection = () => {
   const uploadRef = useRef<HTMLInputElement>(null);
   const [logo, setLogo]: any = useState();
   const [collectionName, setCollectionName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { wallet } = useContext(MarketContext);
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    // Upload Image
+    if (uploadRef.current?.files) {
+      try {
+        const nft = await storeNFT(
+          uploadRef.current?.files[0],
+          collectionName,
+          "An NFT collection"
+        );
+        console.log(nft.data.image.pathname.slice(2).split("/"));
+
+        handleCreateCollection(
+          `https://${
+            nft.data.image.pathname.slice(2).split("/")[0]
+          }.ipfs.nftstorage.link/${
+            nft.data.image.pathname.slice(2).split("/")[1]
+          }`,
+          nft.data.image.pathname.slice(2).split("/")[0]
+        );
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const handleCreateCollection = async (img: string, hash: string) => {
+    try {
+      await wallet?.callMethod({
+        contractId: "pixic.phlay.testnet",
+        method: "create_series",
+        args: {
+          metadata: {
+            name: collectionName,
+            logo_media: img,
+          },
+        },
+        deposit: utils.format.parseNearAmount("0.1"),
+      });
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Stack
@@ -70,6 +121,7 @@ const CreateCollection = () => {
         isDisabled={collectionName === "" || logo === "" || isLoading}
         isLoading={isLoading}
         loadingText="Creating Collection..."
+        onClick={handleSubmit}
       >
         Continue
       </Button>

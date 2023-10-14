@@ -61,6 +61,7 @@ const CreateNFT = () => {
           description: desc,
           media: img,
           media_hash: hash,
+          copies: 1,
         },
         receiver_id: wallet.accountId,
       },
