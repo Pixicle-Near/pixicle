@@ -1,8 +1,11 @@
 import { Avatar, Button, HStack, Input, Stack, Text } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const CreateCollection = () => {
   const uploadRef = useRef<HTMLInputElement>(null);
+  const [logo, setLogo]: any = useState();
+  const [collectionName, setCollectionName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Stack
@@ -26,9 +29,9 @@ const CreateCollection = () => {
         border={"1px solid #000000"}
         borderRadius={"lg"}
         p={"0.6rem"}
-        onClick={() => uploadRef.current?.click}
+        onClick={() => uploadRef.current?.click()}
       >
-        <Avatar name="logo" src={""} size={"xl"} />
+        <Avatar name="logo" src={logo} size={"xl"} />
         <Stack>
           <Text>Click To Upload</Text>
           <Text>
@@ -40,6 +43,9 @@ const CreateCollection = () => {
           type="file"
           visibility={"hidden"}
           position={"absolute"}
+          onChange={(e) =>
+            e.target.files && setLogo(URL.createObjectURL(e.target.files[0]))
+          }
         />
       </HStack>
       <Stack w={"100%"} alignItems={"flex-start"}>
@@ -50,13 +56,20 @@ const CreateCollection = () => {
         >
           Contract Name *
         </Text>
-        <Input type="text" placeholder="My Collection Name" />
+        <Input
+          type="text"
+          placeholder="My Collection Name"
+          value={collectionName}
+          onChange={(e) => setCollectionName(e.target.value)}
+        />
       </Stack>
       <Button
         colorScheme="green"
         type="submit"
         variant={"solid"}
-        isDisabled={true}
+        isDisabled={collectionName === "" || logo === "" || isLoading}
+        isLoading={isLoading}
+        loadingText="Creating Collection..."
       >
         Continue
       </Button>
