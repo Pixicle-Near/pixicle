@@ -35,6 +35,7 @@ export type MarketContextType = {
     tokens: any;
     userTokens: any[];
     userCollections: any[];
+    collections: any[];
 };
   
 export type Constructors = {

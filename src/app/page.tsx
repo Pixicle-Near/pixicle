@@ -24,7 +24,7 @@ import { MarketContext } from "@/context/MarketStore";
 import { useContext } from "react";
 
 export default function Home() {
-  const { categories, tokens } = useContext(MarketContext);
+  const { categories, tokens, collections } = useContext(MarketContext);
   return (
     <main className={styles.main}>
       <Header />
@@ -157,7 +157,7 @@ export default function Home() {
           alignItems={"center"}
           justifyContent={"center"}
         >
-          {categories.map((category: any) => (
+          {collections?.map((category: any) => (
             <CollectionCard key={category.id} collection={category} />
           ))}
         </Stack>

@@ -30,8 +30,10 @@ function CollectionCard({ collection }: collectionCardprops) {
     >
       <Box display={["none", "none", "block"]}>
         <Image
-          src={collection.image}
+          src={collection.metadata.logo_media}
           alt="bayc"
+          width={500}
+          height={500}
           style={{
             width: "8.67188rem",
             height: "6.9375rem",
@@ -41,8 +43,10 @@ function CollectionCard({ collection }: collectionCardprops) {
       </Box>
       <Box display={["block", "block", "none"]}>
         <Image
-          src={collection.image}
+          src={collection.metadata.logo_media}
           alt="bayc"
+          width={500}
+          height={500}
           style={{
             width: "5.35713rem",
             height: "4.28569rem",
@@ -58,7 +62,7 @@ function CollectionCard({ collection }: collectionCardprops) {
         color={"#FFFFFF"}
       >
         <Text fontSize={["1rem", "1rem", "2rem"]} fontWeight={400}>
-          {collection.name || "Bored Ape Yacht Club"}
+          {collection.metadata.name || "Bored Ape Yacht Club"}
         </Text>
         <HStack color={"#B3B3B3"} w={"100%"} justifyContent={"space-between"}>
           <Text
@@ -79,13 +83,13 @@ function CollectionCard({ collection }: collectionCardprops) {
             fontSize={["0.92663rem", "0.92663rem", "1.5rem"]}
             fontWeight={400}
           >
-            {collection.floor || 16.02} NEAR
+            {collection.price || "-"} NEAR
           </Text>
           <Text
             fontSize={["0.92663rem", "0.92663rem", "1.5rem"]}
             fontWeight={400}
           >
-            {collection.volume || "11k"} NEAR
+            {collection.volume || "-"} NEAR
           </Text>
         </HStack>
       </VStack>

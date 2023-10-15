@@ -2,11 +2,15 @@ import { Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import bay from "../../public/images/bay.png";
 import { nftCardprops } from "@/utils/types";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MarketContext } from "@/context/MarketStore";
 
 function NftCard({ nft }: nftCardprops) {
   const [isHover, setIsHover] = useState(false);
+  const { wallet } = useContext(MarketContext);
 
+  const handleBuying = () => {};
+  const handleListing = () => {};
   return (
     <Box
       borderRadius={[
@@ -72,7 +76,7 @@ function NftCard({ nft }: nftCardprops) {
             fontSize={["0.71844rem", "0.71844rem", "1.406rem"]}
             fontWeight={400}
           >
-            2637
+            1
           </Text>
         </HStack>
         <HStack
@@ -82,28 +86,48 @@ function NftCard({ nft }: nftCardprops) {
           justifyContent={"space-between"}
           width={"100%"}
         >
-          <Button
-            variant={"solid"}
-            colorScheme="green"
-            display={isHover ? ["none", "none", "block"] : "none"}
-            transition={"all 0.5s ease-in-out"}
-          >
-            <Text
-              fontSize={["0.59869rem", "0.59869rem", "1.17169rem"]}
-              fontWeight={400}
+          {nft?.owner_id === wallet?.accountId ? (
+            <Button
+              variant={"solid"}
+              colorScheme="green"
+              display={isHover ? ["none", "none", "block"] : "none"}
+              transition={"all 0.5s ease-in-out"}
+              onClick={handleListing}
             >
-              Buy
+              <Text
+                fontSize={["0.59869rem", "0.59869rem", "1.17169rem"]}
+                fontWeight={400}
+              >
+                List For Sale
+              </Text>
+            </Button>
+          ) : (
+            <Button
+              variant={"solid"}
+              colorScheme="green"
+              display={isHover ? ["none", "none", "block"] : "none"}
+              transition={"all 0.5s ease-in-out"}
+              onClick={handleBuying}
+            >
+              <Text
+                fontSize={["0.59869rem", "0.59869rem", "1.17169rem"]}
+                fontWeight={400}
+              >
+                Buy
+              </Text>
+            </Button>
+          )}
+          {nft?.owner_id !== wallet?.accountId && (
+            <Text
+              fontSize={
+                isHover ? "1.5rem" : ["0.95788rem", "0.95788rem", "1.875rem"]
+              }
+              fontWeight={400}
+              transition={"all 1s ease-out"}
+            >
+              77.234 NEAR
             </Text>
-          </Button>
-          <Text
-            fontSize={
-              isHover ? "1.5rem" : ["0.95788rem", "0.95788rem", "1.875rem"]
-            }
-            fontWeight={400}
-            transition={"all 1s ease-out"}
-          >
-            77.234 NEAR
-          </Text>
+          )}
         </HStack>
       </VStack>
     </Box>

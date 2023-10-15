@@ -11,6 +11,7 @@ let value: MarketContextType = {
   tokens: [],
   isAuth: false,
   userCollections: [],
+  collections: [],
 };
 export const MarketContext = createContext(value);
 
@@ -18,6 +19,7 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuth, setIsAuth] = useState(false);
   const router = useRouter();
   const [tokens, setTokens] = useState([]);
+  const [collections, setCollections] = useState([]);
   const [userTokens, setUserTokens] = useState([]);
   const [userCollections, setUserCollections] = useState([]);
 
@@ -41,13 +43,23 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
     const getTokens = async () => {
       await wallet.startUp();
       const tokens = await wallet.viewMethod({
-        contractId: "pix.phlay.testnet",
+        contractId: "pixil.phlay.testnet",
         method: "nft_tokens",
       });
       console.log(tokens);
       setTokens(tokens);
     };
     getTokens();
+    const getCollections = async () => {
+      await wallet.startUp();
+      const collections = await wallet.viewMethod({
+        contractId: "pixil.phlay.testnet",
+        method: "get_series",
+      });
+      console.log(collections);
+      setCollections(collections);
+    };
+    getCollections();
   }, [wallet]);
 
   console.log(tokens);
@@ -103,6 +115,7 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
         tokens,
         userTokens,
         userCollections,
+        collections,
       }}
     >
       {children}
