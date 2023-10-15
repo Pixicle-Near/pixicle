@@ -6,13 +6,20 @@ import categories, { nfts } from "../utils/Data";
 import { MarketContextType } from "@/utils/types";
 import { useRouter } from "next/navigation";
 
-let value: MarketContextType = {};
+let value: MarketContextType = {
+  userTokens: [],
+  tokens: [],
+  isAuth: false,
+  userCollections: [],
+};
 export const MarketContext = createContext(value);
 
 const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuth, setIsAuth] = useState(false);
   const router = useRouter();
   const [tokens, setTokens] = useState([]);
+  const [userTokens, setUserTokens] = useState([]);
+  const [userCollections, setUserCollections] = useState([]);
 
   const wallet = useMemo(() => {
     return new Wallet({
@@ -57,15 +64,26 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
 
   const handleUserData = async () => {
     // get user data
-
-    const userTokens = await wallet.viewMethod({
-      contractId: "pix.phlay.testnet",
-      method: "nft_tokens_for_owner",
-      args: { account_id: wallet.accountId, limit: 5 },
-    });
-
-    console.log(userTokens);
-    return userTokens;
+    try {
+      const userTokens = await wallet.viewMethod({
+        contractId: "pixil.phlay.testnet",
+        method: "nft_tokens_for_owner",
+        args: { account_id: wallet.accountId, limit: 10 },
+      });
+      console.log(userTokens);
+      setUserTokens(userTokens);
+      const coll = await wallet?.viewMethod({
+        contractId: "pixil.phlay.testnet",
+        method: "get_series_by_owner",
+        args: {
+          owner_id: wallet?.accountId,
+        },
+      });
+      console.log(coll);
+      setUserCollections(coll);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleRouting = (route: string) => {
@@ -83,6 +101,8 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
         handleRouting,
         handleUserData,
         tokens,
+        userTokens,
+        userCollections,
       }}
     >
       {children}

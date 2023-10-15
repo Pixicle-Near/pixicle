@@ -32,22 +32,26 @@ import CreateCollection from "@/components/_createCollection";
 import CreateNFT from "@/components/_createNFT";
 
 function Profile() {
-  const { wallet, isAuth, handleUserData } = useContext(MarketContext);
+  const { wallet, isAuth, handleUserData, userTokens, userCollections } =
+    useContext(MarketContext);
   const { onCopy } = useClipboard(wallet?.accountId);
   const router = useRouter();
-  const [userTokens, setUserTokens]: any[] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [mHeading, setMHeading] = useState("Create");
+  const [volume, setVolume] = useState("0.00");
 
   useEffect(() => {
     if (isAuth) {
-      const arr = handleUserData && handleUserData();
-      arr?.then((res) => setUserTokens(res));
-      console.log(arr);
+      handleUserData && handleUserData();
+      setVolume(
+        userCollections?.reduce((acc: any, curr: any) => {
+          acc?.volume + curr?.volume;
+        }, 0)
+      );
     } else {
       router.push("/");
     }
-  }, [isAuth, handleUserData, router]);
+  }, [isAuth]);
 
   // Overlay For Modal
   const Overlay = () => (
@@ -166,7 +170,10 @@ function Profile() {
             gap={"0.69rem"}
           >
             <Text fontSize={["1.25rem", "1.25rem", "2.25rem"]} fontWeight={400}>
-              .phlavorphlay
+              {wallet?.accountId?.slice(
+                0,
+                wallet?.accountId?.split(".")[0].length
+              )}
             </Text>
             <GreyVerified />
           </HStack>
@@ -187,7 +194,7 @@ function Profile() {
           />
         </HStack>
         {/* {User Info} */}
-        <Text
+        {/* <Text
           fontFamily={"NexaBold"}
           color={"#B3B3B3"}
           fontSize={["1rem", "1rem", "1.5rem"]}
@@ -201,7 +208,7 @@ function Profile() {
           collection size of 10,000. Each Doodle allows its owner to vote for
           experiences and activations paid for by the Doodles Community
           Treasury.
-        </Text>
+        </Text> */}
         {/* {User Stats} */}
         <HStack
           alignItems={"center"}
@@ -219,7 +226,7 @@ function Profile() {
             fontSize={["0.7rem", "0.7rem", "1.5rem"]}
             fontWeight={400}
             gtext="NO OF COLLECTION"
-            wtext="6"
+            wtext={`${userCollections?.length || 0}`}
             wdec={true}
           />
         </HStack>

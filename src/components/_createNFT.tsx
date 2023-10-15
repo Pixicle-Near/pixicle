@@ -1,8 +1,8 @@
-import { MarketContext } from "@/context/MarketStore";
 import { storeNFT } from "@/utils/upload";
 import { Button, Input, Select, Stack, Text, Textarea } from "@chakra-ui/react";
 import { utils } from "near-api-js";
 import { useContext, useRef, useState } from "react";
+import { MarketContext } from "@/context/MarketStore";
 
 const CreateNFT = () => {
   const uploadRef = useRef<HTMLInputElement>(null);
@@ -12,7 +12,8 @@ const CreateNFT = () => {
   const [desc, setDersc] = useState("");
   const [file, setFile]: any = useState(null);
   const [imgUrl, setImgUrl] = useState("");
-  const { wallet } = useContext(MarketContext);
+  const { wallet, userCollections } = useContext(MarketContext);
+  const [collection, setCollection] = useState("");
 
   const handleImageUpload = async () => {
     setULoading(true);
@@ -49,12 +50,14 @@ const CreateNFT = () => {
   }
 
   const handleCreateNFT = async (img: string, hash: string) => {
+    console.log(collection);
     setnLoading(true);
     //Create a new NFT
     const nft = await wallet?.callMethod({
-      contractId: "pix.phlay.testnet",
+      contractId: "pixil.phlay.testnet",
       method: "nft_mint",
       args: {
+        id: collection,
         token_id: nftName.replace(" ", "_").toLowerCase(),
         metadata: {
           title: nftName,
@@ -91,6 +94,9 @@ const CreateNFT = () => {
         width={"100%"}
         backgroundImage={`url(${file})`}
         height={"400px"}
+        backgroundSize={"auto"}
+        backgroundRepeat={"no-repeat"}
+        backgroundPosition={"center"}
       >
         <Stack
           bgColor={"#1E1E1E94"}
@@ -105,7 +111,7 @@ const CreateNFT = () => {
         >
           <Text>Click To Upload</Text>
           <Text>
-            Recomended Size: 500 x 500. File types: JPG, PNG, SVG, or GIF
+            Recomended Size: 700 x 1400. File types: JPG, PNG, SVG, or GIF
           </Text>
         </Stack>
         <Input
@@ -121,10 +127,30 @@ const CreateNFT = () => {
           alignSelf={"flex-start"}
           fontSize={["1rem", "1rem", "1.1rem"]}
           fontWeight={600}
+          as={"label"}
+          htmlFor="collection"
+          id="collection_label"
         >
           Choose Collection *
         </Text>
-        <Select placeholder="Choose Collection"></Select>
+        <Select
+          title="collection_label"
+          id="collection"
+          placeholder="Select Collection"
+          onChange={(e) => setCollection(e.target.value)}
+          value={collection}
+          aria-labelledby="collection_label"
+        >
+          {userCollections.map((collection: any) => (
+            <option
+              key={collection.series_id}
+              value={collection.series_id}
+              id={collection.series_id}
+            >
+              {collection.metadata.name}
+            </option>
+          ))}
+        </Select>
       </Stack>
       <Stack w={"100%"} alignItems={"flex-start"}>
         <Text

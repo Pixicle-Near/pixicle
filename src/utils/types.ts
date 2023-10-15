@@ -29,10 +29,12 @@ export type MarketContextType = {
     handleAuth?: () => void;
     handleRouting?: (route: string) => void;
     handleUserData?: () => Promise<any>;
-    isAuth?: boolean;
+    isAuth: boolean;
     categories?: any;
     nfts?: any;
-    tokens?: any;
+    tokens: any;
+    userTokens: any[];
+    userCollections: any[];
 };
   
 export type Constructors = {

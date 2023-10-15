@@ -1,6 +1,14 @@
 import { MarketContext } from "@/context/MarketStore";
 import { storeNFT } from "@/utils/upload";
-import { Avatar, Button, HStack, Input, Stack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  HStack,
+  Input,
+  Stack,
+  Text,
+  Textarea,
+} from "@chakra-ui/react";
 import { utils } from "near-api-js";
 import { useContext, useRef, useState } from "react";
 
@@ -8,6 +16,7 @@ const CreateCollection = () => {
   const uploadRef = useRef<HTMLInputElement>(null);
   const [logo, setLogo]: any = useState();
   const [collectionName, setCollectionName] = useState("");
+  const [collectionDesc, setCollectionDesc] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { wallet } = useContext(MarketContext);
 
@@ -41,12 +50,13 @@ const CreateCollection = () => {
   const handleCreateCollection = async (img: string, hash: string) => {
     try {
       await wallet?.callMethod({
-        contractId: "pixic.phlay.testnet",
+        contractId: "pixil.phlay.testnet",
         method: "create_series",
         args: {
           metadata: {
             name: collectionName,
             logo_media: img,
+            description: collectionDesc,
           },
         },
         deposit: utils.format.parseNearAmount("0.1"),
@@ -112,6 +122,20 @@ const CreateCollection = () => {
           placeholder="My Collection Name"
           value={collectionName}
           onChange={(e) => setCollectionName(e.target.value)}
+        />
+      </Stack>
+      <Stack w={"100%"} alignItems={"flex-start"}>
+        <Text
+          alignSelf={"flex-start"}
+          fontSize={["1rem", "1rem", "1.1rem"]}
+          fontWeight={600}
+        >
+          Contract Name *
+        </Text>
+        <Textarea
+          placeholder="My Collection is about"
+          value={collectionDesc}
+          onChange={(e) => setCollectionDesc(e.target.value)}
         />
       </Stack>
       <Button
