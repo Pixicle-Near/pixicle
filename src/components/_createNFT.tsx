@@ -133,7 +133,7 @@ const CreateNFT = () => {
         >
           Choose Collection *
         </Text>
-        <Select
+        <select
           title="collection_label"
           id="collection"
           placeholder="Select Collection"
@@ -150,7 +150,7 @@ const CreateNFT = () => {
               {collection.metadata.name}
             </option>
           ))}
-        </Select>
+        </select>
       </Stack>
       <Stack w={"100%"} alignItems={"flex-start"}>
         <Text
