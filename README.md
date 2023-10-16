@@ -17,4 +17,4 @@ This is a frontend project for the Pixicle NFT Marketplace smart contract. It is
 
 You can find the live demo on [Pixicle Marketplace](https://pixicle.vercel.app/) - **Note you should turn on Dark Mode when using the site to get the best experience.**
 
-Made with &heart; by [Favour Aniogor](https://github.com/PhantomOz).
+Made with &love; by [Favour Aniogor](https://github.com/PhantomOz).
