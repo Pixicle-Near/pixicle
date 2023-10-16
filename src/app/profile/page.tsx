@@ -50,7 +50,7 @@ function Profile() {
         }, 0)
       );
     }
-  }, [isAuth]);
+  }, [isAuth, handleUserData, userCollections]);
 
   // Overlay For Modal
   const Overlay = () => (
