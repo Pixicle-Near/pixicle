@@ -13,20 +13,57 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import collImage from "../../../public/images/collHeader.png";
-import collAvatar from "../../../public/images/collAvatar.png";
+import collImage from "../../../../public/images/collHeader.png";
+import collAvatar from "../../../../public/images/collAvatar.png";
 import { MarketContext } from "@/context/MarketStore";
-import { useContext } from "react";
+import { useContext, useEffect, useState, useMemo } from "react";
+import { useParams } from "next/navigation";
 
 function Collection() {
-  const { nfts } = useContext(MarketContext);
+  const { nfts, collections, wallet } = useContext(MarketContext);
+  const { slug } = useParams();
+  const [collection, setCollection] = useState<any>(null);
+  const [seriesToken, setSeriesToken] = useState<any>([]);
+
+  useEffect(() => {
+    if (slug && collections) {
+      const id = slug.toString().split("-")[1];
+      console.log(id);
+      if (collections.length > 0) {
+        const collection = collections.find(
+          (coll: any) => coll.series_id === parseInt(id)
+        );
+        console.log(collection);
+        setCollection(collection);
+      }
+    }
+  }, [slug, collections]);
+
+  useMemo(() => {
+    const getCollTokens = async () => {
+      const tokens = await wallet?.viewMethod({
+        contractId: "pixil.phlay.testnet",
+        method: "nft_tokens_for_series",
+        args: { id: parseInt(collection.series_id) },
+      });
+      console.log(tokens);
+      setSeriesToken(tokens);
+    };
+    if (collection) {
+      getCollTokens();
+    }
+  }, [collection, wallet]);
+
   return (
     <main>
       <Header />
       <Stack
         padding={["0.98rem 0.88rem", "0.98rem 0.88rem", "1.88rem 4.63rem"]}
       >
-        <ImageHeader header={collImage} avatar={collAvatar} />
+        <ImageHeader
+          header={collection?.metadata?.banner_media || collImage}
+          avatar={collection?.metadata?.logo_media || collAvatar}
+        />
         <HStack
           fontFamily={"NexaBold"}
           paddingTop={"4.5rem"}
@@ -39,7 +76,7 @@ function Collection() {
             gap={"0.69rem"}
           >
             <Text fontSize={["1.25rem", "1.25rem", "2.25rem"]} fontWeight={400}>
-              Doodles
+              {collection?.metadata?.name.slice(0, 12)}...
             </Text>
             <Verified />
           </HStack>
@@ -47,13 +84,13 @@ function Collection() {
             fontSize={["1rem", "1rem", "1.5rem"]}
             fontWeight={400}
             gtext="ITEM"
-            wtext="9,998"
+            wtext={`${seriesToken?.length}`}
           />
           <InfoText
             fontSize={["1rem", "1rem", "1.5rem"]}
             fontWeight={400}
             gtext="CREATED"
-            wtext="Oct 2021"
+            wtext="Oct 2023"
           />
           <InfoText
             fontSize={["1rem", "1rem", "1.5rem"]}
@@ -77,11 +114,7 @@ function Collection() {
           padding={"0.625rem 1rem"}
           marginTop={"1rem"}
         >
-          A community-driven collectibles project featuring art by Burnt Toast.
-          Doodles come in a joyful range of colors, traits and sizes with a
-          collection size of 10,000. Each Doodle allows its owner to vote for
-          experiences and activations paid for by the Doodles Community
-          Treasury.
+          {collection?.metadata?.description || "A NFT Collection"}
         </Text>
 
         <HStack
@@ -93,14 +126,14 @@ function Collection() {
             fontSize={["0.7rem", "0.7rem", "1.5rem"]}
             fontWeight={400}
             gtext="TOTAL VOLUME"
-            wtext="289,000 NEAR"
+            wtext="- NEAR"
             wdec={true}
           />
           <InfoText
             fontSize={["0.7rem", "0.7rem", "1.5rem"]}
             fontWeight={400}
             gtext="FLOOR PRICE"
-            wtext="89,325 NEAR"
+            wtext="- NEAR"
             wdec={true}
           />
         </HStack>
@@ -144,9 +177,13 @@ function Collection() {
           gap={"0.94rem"}
           flexWrap={"wrap"}
         >
-          {nfts.slice(5, 9).map((nft: any) => (
-            <NftCard key={nft.id} nft={nft} />
-          ))}
+          {seriesToken?.length > 0 ? (
+            seriesToken?.map((nft: any) => <NftCard key={nft.id} nft={nft} />)
+          ) : (
+            <Text w={"100%"} fontSize={["1rem", "2rem"]} textAlign="center">
+              No NFTs Yet
+            </Text>
+          )}
         </HStack>
       </Stack>
       <Footer />

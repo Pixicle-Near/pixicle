@@ -26,7 +26,12 @@ function CollectionCard({ collection }: collectionCardprops) {
         "1.37rem 1.37rem 1.22rem",
       ]}
       cursor={"pointer"}
-      onClick={() => handleRouting && handleRouting("collection")}
+      onClick={() =>
+        handleRouting &&
+        handleRouting(
+          `collection/${collection.metadata.name}-${collection.series_id}`
+        )
+      }
     >
       <Box display={["none", "none", "block"]}>
         <Image

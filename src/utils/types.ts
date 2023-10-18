@@ -21,7 +21,7 @@ export type InfoTextProps = {
   
 export type ImageHeaderProps = {
     header: StaticImageData;
-    avatar: StaticImageData;
+    avatar: any;
 };
   
 export type MarketContextType = {

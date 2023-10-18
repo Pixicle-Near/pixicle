@@ -4,7 +4,7 @@ import { Avatar, Stack } from "@chakra-ui/react";
 function ImageHeader({ header, avatar }: ImageHeaderProps) {
   return (
     <Stack
-      backgroundImage={`url(${header.src})`}
+      backgroundImage={`url(${header.src || header})`}
       backgroundRepeat={"no-repeat"}
       backgroundPosition={"center"}
       backgroundSize={"cover"}
@@ -15,7 +15,7 @@ function ImageHeader({ header, avatar }: ImageHeaderProps) {
       <Avatar
         size="2xl"
         name="Doodles"
-        src={avatar.src}
+        src={avatar?.src || avatar}
         position={"absolute"}
         left={0}
         bottom={"-4rem"}
