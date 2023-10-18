@@ -40,6 +40,7 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
   }, [wallet]);
 
   useMemo(() => {
+    if (typeof window !== 'undefined') {
     const getTokens = async () => {
       await wallet.startUp();
       const tokens = await wallet.viewMethod({
@@ -60,6 +61,7 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
       setCollections(collections);
     };
     getCollections();
+    }
   }, [wallet]);
 
   console.log(tokens);
@@ -82,7 +84,7 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
         method: "nft_tokens_for_owner",
         args: { account_id: wallet.accountId, limit: 10 },
       });
-      console.log(userTokens);
+      // console.log(userTokens);
       setUserTokens(userTokens);
       const coll = await wallet?.viewMethod({
         contractId: "pixil.phlay.testnet",
@@ -91,7 +93,7 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
           owner_id: wallet?.accountId,
         },
       });
-      console.log(coll);
+      // console.log(coll);
       setUserCollections(coll);
     } catch (error) {
       console.log(error);
