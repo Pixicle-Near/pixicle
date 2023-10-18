@@ -20,7 +20,7 @@ import { useContext, useEffect, useState, useMemo } from "react";
 import { useParams } from "next/navigation";
 
 function Collection() {
-  const { nfts, collections, wallet } = useContext(MarketContext);
+  const { collections, wallet, tokens } = useContext(MarketContext);
   const { slug } = useParams();
   const [collection, setCollection] = useState<any>(null);
   const [seriesToken, setSeriesToken] = useState<any>([]);
@@ -41,18 +41,21 @@ function Collection() {
 
   useMemo(() => {
     const getCollTokens = async () => {
-      const tokens = await wallet?.viewMethod({
-        contractId: "pixil.phlay.testnet",
-        method: "nft_tokens_for_series",
-        args: { id: parseInt(collection.series_id) },
-      });
-      console.log(tokens);
-      setSeriesToken(tokens);
+      // const tokens = await wallet?.viewMethod({
+      //   contractId: "pixil.phlay.testnet",
+      //   method: "nft_tokens_for_series",
+      //   args: { id: parseInt(collection.series_id) },
+      // });
+      const ctokens = await tokens?.filter(
+        (toks: any) => toks.series_id === parseInt(collection.series_id)
+      );
+      console.log(ctokens);
+      setSeriesToken(ctokens);
     };
     if (collection) {
       getCollTokens();
     }
-  }, [collection, wallet]);
+  }, [collection, tokens]);
 
   return (
     <main>
