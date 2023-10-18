@@ -40,6 +40,7 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
   }, [wallet]);
 
   useMemo(() => {
+    if (typeof window !== 'undefined') {
     const getTokens = async () => {
       await wallet.startUp();
       const tokens = await wallet.viewMethod({
@@ -60,6 +61,7 @@ const MarketPlaceProvider = ({ children }: { children: React.ReactNode }) => {
       setCollections(collections);
     };
     getCollections();
+    }
   }, [wallet]);
 
   console.log(tokens);
