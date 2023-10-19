@@ -7,6 +7,7 @@ import NftCard from "@/components/_nftCard";
 import { SearchIcon, Verified } from "@/utils/icons";
 import {
   HStack,
+  Heading,
   Input,
   InputGroup,
   Select,
@@ -56,6 +57,24 @@ function Collection() {
       getCollTokens();
     }
   }, [collection, tokens]);
+
+  if (collection === null) {
+    return (
+      <Stack
+        w={"100%"}
+        height={"100vh"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Heading
+          fontSize={["1.5rem", "1.5rem", "2.25rem"]}
+          fontFamily={"NexaBold"}
+        >
+          404 | NOT FOUND
+        </Heading>
+      </Stack>
+    );
+  }
 
   return (
     <main>
