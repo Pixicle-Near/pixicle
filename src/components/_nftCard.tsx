@@ -7,7 +7,7 @@ import { MarketContext } from "@/context/MarketStore";
 
 function NftCard({ nft }: nftCardprops) {
   const [isHover, setIsHover] = useState(false);
-  const { wallet } = useContext(MarketContext);
+  const { wallet, handleRouting } = useContext(MarketContext);
 
   const handleBuying = () => {};
   const handleListing = () => {};
@@ -25,6 +25,7 @@ function NftCard({ nft }: nftCardprops) {
       position={"relative"}
       cursor={"pointer"}
       zIndex={20}
+      onClick={() => handleRouting && handleRouting(`assets/${nft.token_id}`)}
     >
       <Image
         src={nft?.metadata?.media || bay}

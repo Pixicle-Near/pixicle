@@ -5,6 +5,7 @@ import { Button, HStack, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import MenuComp from "./_menu";
 import { MenuListProps } from "@/utils/types";
+import Link from "next/link";
 
 function Header() {
   const { isAuth, handleAuth, wallet, handleRouting } =
@@ -49,7 +50,9 @@ function Header() {
         fontSize={"1.5rem"}
         fontWeight={400}
       >
-        <Text color={"#1DB96F"}>Home</Text>
+        <Text as={Link} href={"/"} color={"#1DB96F"}>
+          Home
+        </Text>
         <Text>Market Place</Text>
         <Text>Trends</Text>
         <Text>FAQ</Text>
