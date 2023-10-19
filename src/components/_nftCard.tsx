@@ -25,7 +25,7 @@ function NftCard({ nft }: nftCardprops) {
       position={"relative"}
       cursor={"pointer"}
       zIndex={20}
-      onClick={() => handleRouting && handleRouting("assets")}
+      onClick={() => handleRouting && handleRouting(`assets/${nft.token_id}`)}
     >
       <Image
         src={nft?.metadata?.media || bay}
